@@ -1,6 +1,5 @@
 import sys, pygame
-import Player
-pygame.init()
+import Player, Level
 
 class App:
     def __init__(self):
@@ -62,7 +61,11 @@ class App:
 
         self.keys = {273:"up", 276:"left", 275:"right", 274:"down"}
 
-        self.player = Player.Player(self.screenScale)
+        self.level = Level.Level(self.screenScale)
+        for t in self.level.tiles:
+            self.renderGroup.add(t)
+
+        self.player = Player.Player(self.screenScale, self.level)
         self.renderGroup.add(self.player)
 
         while(self._running):
